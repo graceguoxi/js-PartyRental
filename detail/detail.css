@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding:0;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.detail-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail-content img {
+  max-width: 800px;
+  margin-right: 30px;
+}
+
+.detail-img p {
+  font-size: 22px;
+}
+
+.detail-box {
+  max-width: 80%;
+  margin: 0 auto;
+}
