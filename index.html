@@ -18,19 +18,20 @@
         <div id="categorys" class="col-12 col-lg-7 col-xl-4 mt-1 mt-xl-0">
           <p>Category</p>
         </div>
-        <select class="form-select col-4"  id="select" onchange="filterCategory()">
-          
+        <select class="form-select col-4"  id="select" onchange="filterPrice()">
+
         </select>
       </section>
       <section id="price">
         <div class="col-12 col-lg-7 col-xl-4 mt-1 mt-xl-0">
           <p>Price</p>
         </div>
-        <select class="form-select" aria-label="Default select example">
+        <select class="form-select" id="price-select" onChange="filterPrice()">
           <option selected>ALL</option>
-          <option value="1">0-100</option>
-          <option value="2">101-500</option>
-          <option value="3">>1000</option>
+          <option value="100">0-100</option>
+          <option value="500">101-500</option>
+          <option value="1000">500-1000</option>
+          <option value=">1000">>1000</option>
         </select>
       </section>
       <section id="sort">
