@@ -33,7 +33,7 @@ function filterCategory () {
 	
 }
 
-function filterPrice() {
+function filterAll() {
   // console.log('bbb')
 
 	let selectedPrice = document.querySelector
@@ -101,3 +101,32 @@ function list (productList) {
 }
 
 list(productList1);
+
+let ascend = document.querySelector('#ascend');
+let decend = document.querySelector('#decend');
+let reset = document.querySelector('#reset');
+
+console.log('as',ascend);
+
+function ascending () {
+		let products = rawdata.filter(item =>item.productMedia && item.productMedia.length >0)
+
+		products.sort((a,b) => a.price - b.price)
+		list(products);
+	}
+
+function decending () {
+	let products = rawdata.filter(item =>item.productMedia && item.productMedia.length >0)
+
+	products.sort((a,b) => b.price - a.price)
+	list(products);
+}
+
+function resetItem () {
+	let products = rawdata.filter(item =>item.productMedia && item.productMedia.length >0)
+
+	list(products);
+}
+
+
+	

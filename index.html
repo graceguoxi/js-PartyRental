@@ -18,7 +18,7 @@
         <div id="categorys" class="col-12 col-lg-7 col-xl-4 mt-1 mt-xl-0">
           <p>Category</p>
         </div>
-        <select class="form-select col-4"  id="select" onchange="filterPrice()">
+        <select class="form-select col-4"  id="select" onchange="filterAll()">
 
         </select>
       </section>
@@ -26,7 +26,7 @@
         <div class="col-12 col-lg-7 col-xl-4 mt-1 mt-xl-0">
           <p>Price</p>
         </div>
-        <select class="form-select" id="price-select" onChange="filterPrice()">
+        <select class="form-select" id="price-select" onchange="filterAll()">
           <option selected>ALL</option>
           <option value="100">0-100</option>
           <option value="500">101-500</option>
@@ -39,9 +39,9 @@
           <p>Sort</p>
         </div>
         <div>
-          <button>Ascending</button>
-          <button>Decending</button>
-          <button>Reset Filter</button>
+          <button id="ascend" onclick="ascending()" >Ascending</button>
+          <button id="decend" onclick="decending()">Decending</button>
+          <button id="reset" onclick="resetItem()">Reset Filter</button>
         </div>
       </section>
     </header>
