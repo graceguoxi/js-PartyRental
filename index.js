@@ -17,21 +17,21 @@ allcategorys.innerHTML = category
 
 const productList1 = rawdata.filter(item =>item.productMedia && item.productMedia.length >0)
 
-function filterCategory () {
-	// console.log("aa")
-	let select = document.getElementById('select')
-	let value = select.value
-	// console.log(value)
+// function filterCategory () {
+// 	// console.log("aa")
+// 	let select = document.getElementById('select')
+// 	let value = select.value
+// 	// console.log(value)
 
-	const selectedProd = rawdata.filter(function(item) {
+// 	const selectedProd = rawdata.filter(function(item) {
 
-	  return item.categoryId == value && item.productMedia && item.productMedia.length >0
+// 	  return item.categoryId == value && item.productMedia && item.productMedia.length >0
 		 	
-	})
-	// console.log('1111',selectedProd)
-	list(selectedProd)
+// 	})
+// 	// console.log('1111',selectedProd)
+// 	list(selectedProd)
 	
-}
+// }
 
 function filterAll() {
   // console.log('bbb')
@@ -44,7 +44,11 @@ function filterAll() {
 	let value = select.value
   console.log('all' ,value)
 
-  const selePriceProd = rawdata.filter(function(item) {
+	let ascend = document.querySelector('#ascend');
+	let decend = document.querySelector('#decend');
+	let reset = document.querySelector('#reset');	
+
+  const seleProd = rawdata.filter(function(item) {
 		let commonFilter = item.productMedia && item.productMedia.length >0
 		if(value !== '0') {
       commonFilter = item.categoryId == value && commonFilter
@@ -65,8 +69,12 @@ function filterAll() {
 		}
 		return commonFilter
 	})
-	// console.log(selePriceProd)
-	list(selePriceProd)
+	console.log(seleProd)
+  
+	if(ascend.)
+	seleProd.sort((a,b) => a.price - b.price)
+
+	list(seleProd)
 }
 
 
@@ -102,18 +110,18 @@ function list (productList) {
 
 list(productList1);
 
-let ascend = document.querySelector('#ascend');
-let decend = document.querySelector('#decend');
-let reset = document.querySelector('#reset');
+// let ascend = document.querySelector('#ascend');
+// let decend = document.querySelector('#decend');
+// let reset = document.querySelector('#reset');
 
 console.log('as',ascend);
 
-function ascending () {
-		let products = rawdata.filter(item =>item.productMedia && item.productMedia.length >0)
+// function ascending () {
+// 	let products = rawdata.filter(item =>item.productMedia && item.productMedia.length >0)
 
-		products.sort((a,b) => a.price - b.price)
-		list(products);
-	}
+// 	products.sort((a,b) => a.price - b.price)
+// 	list(products);
+// }
 
 function decending () {
 	let products = rawdata.filter(item =>item.productMedia && item.productMedia.length >0)
