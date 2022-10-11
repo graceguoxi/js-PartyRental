@@ -33,8 +33,9 @@ const productList1 = rawdata.filter(item =>item.productMedia && item.productMedi
 	
 // }
 
-function filterAll() {
+function filterAll(clicked_id) {
   // console.log('bbb')
+	// console.log(clicked_id)
 
 	let selectedPrice = document.querySelector
 	('#price-select')
@@ -44,11 +45,7 @@ function filterAll() {
 	let value = select.value
   console.log('all' ,value)
 
-	let ascend = document.querySelector('#ascend');
-	let decend = document.querySelector('#decend');
-	let reset = document.querySelector('#reset');	
-
-  const seleProd = rawdata.filter(function(item) {
+  let seleProd = rawdata.filter(function(item) {
 		let commonFilter = item.productMedia && item.productMedia.length >0
 		if(value !== '0') {
       commonFilter = item.categoryId == value && commonFilter
@@ -71,9 +68,17 @@ function filterAll() {
 	})
 	console.log(seleProd)
   
-	if(ascend.)
-	seleProd.sort((a,b) => a.price - b.price)
-
+	if( clicked_id == 'ascend' ) {
+		seleProd.sort((a,b) => a.price - b.price)
+	}else if ( clicked_id == 'decend' ) {
+		seleProd.sort((a,b) => b.price - a.price)
+	}else if ( clicked_id == 'reset'){
+		seleProd = rawdata.filter(item =>item.productMedia && item.productMedia.length >0)
+		// todo: category back to all, price back to all
+    select.value = 0
+		selectedPrice.value = 0
+	}
+	
 	list(seleProd)
 }
 
@@ -114,7 +119,7 @@ list(productList1);
 // let decend = document.querySelector('#decend');
 // let reset = document.querySelector('#reset');
 
-console.log('as',ascend);
+// console.log('as',ascend);
 
 // function ascending () {
 // 	let products = rawdata.filter(item =>item.productMedia && item.productMedia.length >0)
@@ -123,18 +128,18 @@ console.log('as',ascend);
 // 	list(products);
 // }
 
-function decending () {
-	let products = rawdata.filter(item =>item.productMedia && item.productMedia.length >0)
+// function decending () {
+// 	let products = rawdata.filter(item =>item.productMedia && item.productMedia.length >0)
 
-	products.sort((a,b) => b.price - a.price)
-	list(products);
-}
+// 	products.sort((a,b) => b.price - a.price)
+// 	list(products);
+// }
 
-function resetItem () {
-	let products = rawdata.filter(item =>item.productMedia && item.productMedia.length >0)
+// function resetItem () {
+// 	let products = rawdata.filter(item =>item.productMedia && item.productMedia.length >0)
 
-	list(products);
-}
+// 	list(products);
+// }
 
 
 	

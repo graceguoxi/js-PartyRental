@@ -27,7 +27,7 @@
           <p>Price</p>
         </div>
         <select class="form-select" id="price-select" onchange="filterAll()">
-          <option selected>ALL</option>
+          <option value="0" selected>ALL</option>
           <option value="100">0-100</option>
           <option value="500">101-500</option>
           <option value="1000">500-1000</option>
@@ -39,9 +39,9 @@
           <p>Sort</p>
         </div>
         <div>
-          <button id="ascend" onclick="filterAll()" >Ascending</button>
-          <button id="decend" onclick="filterAll()">Decending</button>
-          <button id="reset" onclick="filterAll()">Reset Filter</button>
+          <button id="ascend" onclick="filterAll(this.id)" >Ascending</button>
+          <button id="decend" onclick="filterAll(this.id)">Decending</button>
+          <button id="reset" onclick="filterAll(this.id)">Reset Filter</button>
         </div>
       </section>
     </header>
