@@ -1,5 +1,4 @@
 
-
 const prodCategoryList = rawdata[0].prodType.productCategory
 
 let allcategorys = document.querySelector('#select')
@@ -14,7 +13,10 @@ for (let i of prodCategoryList) {
 
 allcategorys.innerHTML = category
 
-
+const url = new URL(window.location.href)
+console.log('search', url.search)
+const params = new URLSearchParams(url.search)
+console.log('params', params.toString())
 const productList1 = rawdata.filter(item =>item.productMedia && item.productMedia.length >0)
 
 // function filterCategory () {
@@ -32,24 +34,69 @@ const productList1 = rawdata.filter(item =>item.productMedia && item.productMedi
 // 	list(selectedProd)
 	
 // }
+let selectedPrice = document.querySelector('#price-select')
+let selectedCategory = document.getElementById('select')
 
 function filterAll(clicked_id) {
+	if( clicked_id == 'ascend' ) {
+		params.set('sort','asc')
+	}else if ( clicked_id == 'decend' ) {
+		params.set('sort','desc')
+	}else if ( clicked_id == 'reset'){
+		params.delete('categoryId')
+		params.delete('priceRange')
+		params.delete('sort')
+	}else if( clicked_id == 'select') {
+    params.set('categoryId',selectedCategory.value)
+	}else if(clicked_id == 'price-select') {
+		params.set('priceRange',selectedPrice.value)
+	}
+
+
+	window.location.href = `${window.location.pathname}?${params.toString()}`
+}
+
+function executeFilter() {
+	
+	const categoryValue = params.get('categoryId') || "0"
+	if (params.get('categoryId')) {
+		selectedCategory.value = params.get('categoryId')
+	}
+	// console.log('category', category)
+
+	const priceValue = params.get('priceRange') || "0"
+	if(params.get('priceRange')) {
+		selectedPrice.value = params.get('priceRange')
+	}
+
+	const sort = params.get('sort')
+	
+
   // console.log('bbb')
 	// console.log(clicked_id)
 
-	let selectedPrice = document.querySelector
-	('#price-select')
-	let priceValue = selectedPrice.value
+	// let selectedPrice = document.querySelector('#price-select')
+	// let priceValue = selectedPrice.value
 	// console.log('8888',priceValue)
-	let select = document.getElementById('select')
-	let value = select.value
-  console.log('all' ,value)
+	// let selectedCategory = document.getElementById('select')
+	// let categoryValue = selectedCategory.value
+  console.log('all' ,categoryValue)
 
-  let seleProd = rawdata.filter(function(item) {
-		let commonFilter = item.productMedia && item.productMedia.length >0
-		if(value !== '0') {
-      commonFilter = item.categoryId == value && commonFilter
+  let seleProd = rawdata.filter((item) => {
+		// let commonFilter = item.productMedia && item.productMedia.length >0
+
+		let commonFilter = (item.productMedia && item.productMedia.length > 0) ?
+		item:null
+		// if(item.productMedia && item.productMedia.length > 0) commonFilter = item
+
+		// console.log(commonFilter)
+
+
+		if(categoryValue !== '0') {
+      commonFilter = item.categoryId == categoryValue && commonFilter
+			// console.log(commonFilter)
 		}
+		// console.log('cate',categoryValue)
 		if (priceValue === '100') {
 			// console.log ('100',100)
       return item.price <= 100 && commonFilter
@@ -68,22 +115,17 @@ function filterAll(clicked_id) {
 	})
 	console.log(seleProd)
   
-	if( clicked_id == 'ascend' ) {
+	if( sort == 'asc' ) {
 		seleProd.sort((a,b) => a.price - b.price)
-	}else if ( clicked_id == 'decend' ) {
+		
+	}else if ( sort == 'desc' ) {
 		seleProd.sort((a,b) => b.price - a.price)
-	}else if ( clicked_id == 'reset'){
-		seleProd = rawdata.filter(item =>item.productMedia && item.productMedia.length >0)
-		// todo: category back to all, price back to all
-    select.value = 0
-		selectedPrice.value = 0
 	}
-	
+
 	list(seleProd)
 }
 
-
-function list (productList) {
+function list(productList) {
 
 	let listElement = document.querySelector('#prodList')
 	let templates = ''
@@ -92,7 +134,7 @@ function list (productList) {
 	// for (let product of productList) {
 		
 
-		let viewTemplate = `
+		const viewTemplate = `
 			<div class="col-3">
 				<a href="./detail/detail.html?prodId=${product.prodId}">
 					<div class="card">
@@ -113,7 +155,9 @@ function list (productList) {
 	listElement.innerHTML = templates
 }
 
-list(productList1);
+executeFilter();
+
+// list(productList1);
 
 // let ascend = document.querySelector('#ascend');
 // let decend = document.querySelector('#decend');
