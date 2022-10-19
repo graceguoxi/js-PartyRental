@@ -3,7 +3,7 @@
 //初始化URL URL() 构造函数返回一个新创建的 URL 对象
 const url = new URL(window.location.href)
 const params = new URLSearchParams(url.search)
-//得到category 和 price 选择框
+//得到category 和 price 选择框元素的引用
 let selectedCategory = document.getElementById('category-select')
 let selectedPrice = document.querySelector('#price-select')
 
@@ -11,12 +11,12 @@ renderCategoryList()
 executeFilter()
 
 function renderCategoryList() {
-	//得到所有的category
+	//得到所有的category list
 	const prodCategoryList = rawdata[0].prodType.productCategory
 	//设置默认的option
 	let category = `<option value="0">All hires</option>`
 
-	//for循环prodCategoryList里的每一个i 然后放到category里
+	//for循环prodCategoryList里的每一个i 然后加到category里
 	for(let i of prodCategoryList) {
   	category += `
 	  	<option value="${i.categoryId}">${i.categoryName}</option>
@@ -29,7 +29,7 @@ function renderCategoryList() {
 
 
 // 2. update/delete the url search params based on the users select/click,
-// then navigate to the updated url
+// then navigate to the updated url  (then set url params accordingly )
 
 function filterAll(clicked_id) {
 	//判断clicked_id 是否是 category-select，如果是 就把categoryId设置为 selectedCategory.value
@@ -128,7 +128,7 @@ function list(productList) {
 	productList.forEach(product => {
 	// for (let product of productList) {
 		
-   //遍历模版 遍历所有产品
+   //遍历所有的产品 然后组装所有产品对应的模版
 		const viewTemplate = `
 			<div class="col-3">
 				<a href="./detail/detail.html?prodId=${product.prodId}">
